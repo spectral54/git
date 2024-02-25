@@ -784,12 +784,6 @@ AC_CHECK_HEADER([sys/poll.h],
 [NO_SYS_POLL_H=UnfortunatelyYes])
 GIT_CONF_SUBST([NO_SYS_POLL_H])
 #
-# Define NO_INTTYPES_H if you don't have inttypes.h
-AC_CHECK_HEADER([inttypes.h],
-[NO_INTTYPES_H=],
-[NO_INTTYPES_H=UnfortunatelyYes])
-GIT_CONF_SUBST([NO_INTTYPES_H])
-#
 # Define OLD_ICONV if your library has an old iconv(), where the second
 # (input buffer pointer) parameter is declared with type (const char **).
 AC_DEFUN([OLDICONVTEST_SRC], [
