@@ -353,8 +353,8 @@ The remaining data of each directory block is grouped by type:
 
   - (Version 1)
     64-bit time: the extension data reflects all changes through the given
-	time which is stored as the nanoseconds elapsed since midnight,
-	January 1, 1970.
+    time which is stored as the nanoseconds elapsed since midnight,
+    January 1, 1970.
 
   - (Version 2)
     A null terminated string: an opaque token defined by the file system
@@ -382,12 +382,12 @@ The remaining data of each directory block is grouped by type:
   - 32-bit offset to the end of the index entries
 
   - Hash over the extension types and their sizes (but not
-	their contents).  E.g. if we have "TREE" extension that is N-bytes
-	long, "REUC" extension that is M-bytes long, followed by "EOIE",
-	then the hash would be:
+    their contents).  E.g. if we have "TREE" extension that is N-bytes
+    long, "REUC" extension that is M-bytes long, followed by "EOIE",
+    then the hash would be:
 
-	Hash("TREE" + <binary-representation-of-N> +
-		"REUC" + <binary-representation-of-M>)
+        Hash("TREE" + <binary-representation-of-N> +
+                "REUC" + <binary-representation-of-M>)
 
 == Index Entry Offset Table
 
@@ -403,7 +403,7 @@ The remaining data of each directory block is grouped by type:
   - A number of index offset entries each consisting of:
 
     - 32-bit offset from the beginning of the file to the first cache entry
-	in this block of entries.
+      in this block of entries.
 
     - 32-bit count of cache entries in this block
 
