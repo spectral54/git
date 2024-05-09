@@ -25,13 +25,13 @@ Git index format
 
    * A 12-byte header consisting of
 
-     4-byte signature:
-       The signature is { 'D', 'I', 'R', 'C' } (stands for "dircache")
+     ** 4-byte signature: +
+        The signature is { 'D', 'I', 'R', 'C' } (stands for "dircache")
 
-     4-byte version number:
-       The current supported versions are 2, 3 and 4.
+     ** 4-byte version number: +
+        The current supported versions are 2, 3 and 4.
 
-     32-bit number of index entries.
+     ** 32-bit number of index entries.
 
    * A number of sorted index entries (see below).
 
@@ -40,12 +40,12 @@ Git index format
      Extensions are identified by signature. Optional extensions can
      be ignored if Git does not understand them.
 
-     4-byte extension signature. If the first byte is 'A'..'Z' the
-     extension is optional and can be ignored.
+     ** 4-byte extension signature. If the first byte is 'A'..'Z' the
+        extension is optional and can be ignored.
 
-     32-bit size of the extension
+     ** 32-bit size of the extension
 
-     Extension data
+     ** Extension data
 
    * Hash checksum over the content of the index file before this checksum.
 
@@ -63,80 +63,80 @@ Git index format
   These entries have mode `040000`, include the `SKIP_WORKTREE` bit, and
   the path ends in a directory separator.
 
-  32-bit ctime seconds, the last time a file's metadata changed
+  * 32-bit ctime seconds, the last time a file's metadata changed +
     this is stat(2) data
 
-  32-bit ctime nanosecond fractions
+  * 32-bit ctime nanosecond fractions +
     this is stat(2) data
 
-  32-bit mtime seconds, the last time a file's data changed
+  * 32-bit mtime seconds, the last time a file's data changed +
     this is stat(2) data
 
-  32-bit mtime nanosecond fractions
+  * 32-bit mtime nanosecond fractions +
     this is stat(2) data
 
-  32-bit dev
+  * 32-bit dev +
     this is stat(2) data
 
-  32-bit ino
+  * 32-bit ino +
     this is stat(2) data
 
-  32-bit mode, split into (high to low bits)
+  * 32-bit mode, split into (high to low bits)
 
-    16-bit unused, must be zero
+    ** 16-bit unused, must be zero
 
-    4-bit object type
-      valid values in binary are 1000 (regular file), 1010 (symbolic link)
-      and 1110 (gitlink)
+    ** 4-bit object type +
+       valid values in binary are 1000 (regular file), 1010 (symbolic link)
+       and 1110 (gitlink)
 
-    3-bit unused, must be zero
+    ** 3-bit unused, must be zero
 
-    9-bit unix permission. Only 0755 and 0644 are valid for regular files.
-    Symbolic links and gitlinks have value 0 in this field.
+    ** 9-bit unix permission. Only 0755 and 0644 are valid for regular files.
+       Symbolic links and gitlinks have value 0 in this field.
 
-  32-bit uid
+  * 32-bit uid +
     this is stat(2) data
 
-  32-bit gid
+  * 32-bit gid +
     this is stat(2) data
 
-  32-bit file size
+  * 32-bit file size +
     This is the on-disk size from stat(2), truncated to 32-bit.
 
-  Object name for the represented object
+  * Object name for the represented object
 
-  A 16-bit 'flags' field split into (high to low bits)
+  * A 16-bit 'flags' field split into (high to low bits)
 
-    1-bit assume-valid flag
+    ** 1-bit assume-valid flag
 
-    1-bit extended flag (must be zero in version 2)
+    ** 1-bit extended flag (must be zero in version 2)
 
-    2-bit stage (during merge)
+    ** 2-bit stage (during merge)
 
-    12-bit name length if the length is less than 0xFFF; otherwise 0xFFF
-    is stored in this field.
+    ** 12-bit name length if the length is less than 0xFFF; otherwise 0xFFF
+       is stored in this field.
 
-  (Version 3 or later) A 16-bit field, only applicable if the
-  "extended flag" above is 1, split into (high to low bits).
+  * (Version 3 or later) A 16-bit field, only applicable if the
+    "extended flag" above is 1, split into (high to low bits).
 
-    1-bit reserved for future
+    ** 1-bit reserved for future
 
-    1-bit skip-worktree flag (used by sparse checkout)
+    ** 1-bit skip-worktree flag (used by sparse checkout)
 
-    1-bit intent-to-add flag (used by "git add -N")
+    ** 1-bit intent-to-add flag (used by "git add -N")
 
-    13-bit unused, must be zero
+    ** 13-bit unused, must be zero
 
-  Entry path name (variable length) relative to top level directory
+  * Entry path name (variable length) relative to top level directory
     (without leading slash). '/' is used as path separator. The special
     path components ".", ".." and ".git" (without quotes) are disallowed.
     Trailing slash is also disallowed.
-
+  +
     The exact encoding is undefined, but the '.' and '/' characters
     are encoded in 7-bit ASCII and the encoding cannot contain a NUL
     byte (iow, this is a UNIX pathname).
-
-  (Version 4) In version 4, the entry path name is prefix-compressed
+  +
+    (Version 4) In version 4, the entry path name is prefix-compressed
     relative to the path name for the previous entry (the very first
     entry is encoded as if the path name for the previous entry is an
     empty string).  At the beginning of an entry, an integer N in the
@@ -146,11 +146,11 @@ Git index format
     path name for the previous entry, and replacing it with the string S
     yields the path name for this entry.
 
-  1-8 nul bytes as necessary to pad the entry to a multiple of eight bytes
-  while keeping the name NUL-terminated.
-
-  (Version 4) In version 4, the padding after the pathname does not
-  exist.
+  * 1-8 nul bytes as necessary to pad the entry to a multiple of eight bytes
+    while keeping the name NUL-terminated.
+  +
+    (Version 4) In version 4, the padding after the pathname does not
+    exist.
 
   Interpretation of index entries in split index mode is completely
   different. See below for details.
