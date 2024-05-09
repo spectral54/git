@@ -279,7 +279,7 @@ Git index format
   final index. These added entries are also sorted by entry name then
   stage.
 
-== Untracked cache
+=== Untracked cache
 
   Untracked cache saves the untracked file list and necessary data to
   verify the cache. The signature for this extension is { 'U', 'N',
@@ -341,7 +341,7 @@ The remaining data of each directory block is grouped by type:
 
   - One NUL.
 
-== File System Monitor cache
+=== File System Monitor cache
 
   The file system monitor cache tracks files for which the core.fsmonitor
   hook has told us about changes.  The signature for this extension is
@@ -366,7 +366,7 @@ The remaining data of each directory block is grouped by type:
   - An ewah bitmap, the n-th bit indicates whether the n-th index entry
     is not CE_FSMONITOR_VALID.
 
-== End of Index Entry
+=== End of Index Entry
 
   The End of Index Entry (EOIE) is used to locate the end of the variable
   length index entries and the beginning of the extensions. Code can take
@@ -389,7 +389,7 @@ The remaining data of each directory block is grouped by type:
         Hash("TREE" + <binary-representation-of-N> +
                 "REUC" + <binary-representation-of-M>)
 
-== Index Entry Offset Table
+=== Index Entry Offset Table
 
   The Index Entry Offset Table (IEOT) is used to help address the CPU
   cost of loading the index by enabling multi-threading the process of
@@ -407,7 +407,7 @@ The remaining data of each directory block is grouped by type:
 
     - 32-bit count of cache entries in this block
 
-== Sparse Directory Entries
+=== Sparse Directory Entries
 
   When using sparse-checkout in cone mode, some entire directories within
   the index can be summarized by pointing to a tree object instead of the
